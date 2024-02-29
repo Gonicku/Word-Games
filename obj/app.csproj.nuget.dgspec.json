@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\denal\\Desktop\\Intern Stuff\\app\\app.csproj": {}
+    "C:\\Users\\denal\\Desktop\\Intern Stuff\\app\\app.csproj": {}
   },
   "projects": {
-    "c:\\Users\\denal\\Desktop\\Intern Stuff\\app\\app.csproj": {
+    "C:\\Users\\denal\\Desktop\\Intern Stuff\\app\\app.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\denal\\Desktop\\Intern Stuff\\app\\app.csproj",
+        "projectUniqueName": "C:\\Users\\denal\\Desktop\\Intern Stuff\\app\\app.csproj",
         "projectName": "app",
-        "projectPath": "c:\\Users\\denal\\Desktop\\Intern Stuff\\app\\app.csproj",
+        "projectPath": "C:\\Users\\denal\\Desktop\\Intern Stuff\\app\\app.csproj",
         "packagesPath": "C:\\Users\\denal\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\denal\\Desktop\\Intern Stuff\\app\\obj\\",
+        "outputPath": "C:\\Users\\denal\\Desktop\\Intern Stuff\\app\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\denal\\AppData\\Roaming\\NuGet\\NuGet.Config"
