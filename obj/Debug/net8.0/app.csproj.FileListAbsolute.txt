@@ -12,3 +12,4 @@ C:\Users\denal\Desktop\Intern Stuff\app\obj\Debug\net8.0\refint\app.dll
 C:\Users\denal\Desktop\Intern Stuff\app\obj\Debug\net8.0\app.pdb
 C:\Users\denal\Desktop\Intern Stuff\app\obj\Debug\net8.0\app.genruntimeconfig.cache
 C:\Users\denal\Desktop\Intern Stuff\app\obj\Debug\net8.0\ref\app.dll
+C:\Users\denal\Desktop\Intern Stuff\app\obj\Debug\net8.0\app.sourcelink.json

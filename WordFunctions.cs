@@ -1,12 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
+using System.Diagnostics;
 using System.IO;
 
 class WordFunctions
 {
-    // Variables
-    static string baseFilePath = @"C:\Users\denal\Desktop\Intern Stuff\app\Dictionary Files\Word-lists-in-csv\Word lists in csv";
-    static string baseFilePathDictionary = @"C:\Users\denal\Desktop\Intern Stuff\app\Dictionary Files\Dictionary in csv";
-
     // Methods
 
     /** chooseFile
@@ -17,9 +14,9 @@ class WordFunctions
      * */
     public static string chooseFile(String input)
     {
-        string firstLetter = input.Substring(0,1);
-        firstLetter.ToUpper();
-        string fileName = @"\" + firstLetter + "word.csv";
+        string firstLetter = input.Substring(0,1).ToUpper();
+        string fileName = Path.Combine(Directory.GetCurrentDirectory(),
+        "Dictionary Files\\Word lists in csv\\" + firstLetter + "word.csv");
 
         return fileName;
     } // chooseFile
@@ -32,9 +29,9 @@ class WordFunctions
      * */
     public static string chooseDictionaryFile(String input)
     {
-        string firstLetter = input.Substring(0,1);
-        firstLetter.ToUpper();
-        string fileName = @"\" + firstLetter;
+        string firstLetter = input.Substring(0,1).ToUpper();
+        string fileName = Path.Combine(Directory.GetCurrentDirectory(),
+        "Dictionary Files\\Dictionary in csv\\" + firstLetter + ".csv");
 
         return fileName;
     } // chooseFile
@@ -46,13 +43,12 @@ class WordFunctions
      * */
     public static bool doesWordExist(String input)
     {
-        string filePath = baseFilePath;
+        // Select the right file based on the first char of the inputted word
+        string filePath = chooseFile(input);
         bool wordExists = false;
         input += " ";
         StreamReader? reader = null;
         Console.WriteLine("Inputted Word: " + input);
-        // Select the right file based on the first char of the inputted word
-        filePath += chooseFile(input);
 
         // Read the selected data file
         if(File.Exists(filePath))
@@ -82,7 +78,7 @@ class WordFunctions
             }
         } else
         {
-            Console.WriteLine("File doesn't exist.");
+            Console.WriteLine("File '" + filePath + "' doesn't exist.");
         }
         return wordExists;
     } // doesWordExist
@@ -104,13 +100,12 @@ class WordFunctions
      * */
     public static bool doesWordMatchMeaning(String input)
     {
-        string filePath = baseFilePathDictionary;
+        // Select the right file based on the first char of the inputted word
+        string filePath = chooseDictionaryFile(input);
         bool wordExists = false;
         input += " ";
         StreamReader? reader = null;
         Console.WriteLine("Inputted Word: " + input);
-        // Select the right file based on the first char of the inputted word
-        filePath += chooseDictionaryFile(input);
 
         // Read the selected data file
         if(File.Exists(filePath))
