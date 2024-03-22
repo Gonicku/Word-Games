@@ -4,6 +4,8 @@ using System.IO;
 
 class WordFunctions
 {
+
+
     // Methods
 
     /** chooseFile
@@ -96,48 +98,55 @@ class WordFunctions
     /** doesWordMatchMeaning
      * Determines if the inputted word matches our dictionary's definition of said word
      * @param input: The word the user typed in (String)
+     * @param defInput: The inputted definition (String)
      * @return: Whether or not the inputted definition matches the dictionary's definition (Boolean)
      * */
-    public static bool doesWordMatchMeaning(String input)
+    public static bool doesWordMatchMeaning(String input, String defInput)
     {
+        string word = "";
+        string definition = "";
+        string quotation = "";
+        quotation += (char) 34;
         // Select the right file based on the first char of the inputted word
         string filePath = chooseDictionaryFile(input);
-        bool wordExists = false;
+        bool defMatches = false;
         input += " ";
-        StreamReader? reader = null;
+        IEnumerable<string> lines = File.ReadLines(filePath);
         Console.WriteLine("Inputted Word: " + input);
 
-        // Read the selected data file
-        if(File.Exists(filePath))
+        /* NOTE: This is unfinished, but the idea is to loop through the file until the 
+        inputted word is found. Then it reads character by character until it reaches a ')',
+        at which point it reads upcoming characters as the definition we seek*/
+        foreach(string line in lines)
         {
-            reader = new StreamReader(File.OpenRead(filePath));
-            List<string> listA = new List<string>();
-            while(!reader.EndOfStream && !wordExists)
-            {
-                var line = reader.ReadLine();
-                var values = line.Split(',');
-                // Adds each word to a list
-                foreach(var item in values)
+            //Console.WriteLine("\n Word " + iteration + ": " + line);
+            if(!string.IsNullOrEmpty(line)){
+                // If the first character in a line is a quotation, ignore the first character
+                if(line.Substring(0, 1).Equals(quotation))
                 {
-                    listA.Add(item);
+                    word = line.Substring(1, line.IndexOf(' '));
                 }
-                foreach(var column1 in listA)
+                else
                 {
-                    // If the current word matches the input, break the loop
-                    if(String.Equals(column1, input, StringComparison.InvariantCultureIgnoreCase))
+                    word = line.Substring(0, line.IndexOf(' '));
+                }
+                //Console.WriteLine("\nWord: " + word);
+                // If the word matches our inputted word, split the line between the word and its definition
+                if(word.Equals(input))
+                {
+                    definition = line.Substring(line.IndexOf(')') + 2);
+                    // If the definition found matches our inputted definition, break the loop
+                    //Console.WriteLine("Current Word: " + word + ", Current Definition: " + definition);
+                    if(definition.Equals(defInput))
                     {
-                        Console.WriteLine("Word Found!\n");
-                        wordExists = true;
-                        break;
+                        defMatches = true;
+                        return defMatches;
                     }
-                    //Console.WriteLine(column1); // Writes the current word to the console
                 }
             }
-        } else
-        {
-            Console.WriteLine("File doesn't exist.\n");
         }
-        return wordExists;
+        Console.WriteLine("\nDefinition Found: " + definition + "\n");
+        return defMatches;
     } // doesWordMatchMeaning
 
     /** doesWordContainXLetter
@@ -259,6 +268,8 @@ class WordFunctions
 
     public static void Main(string[] args)
     {
+        string quotation = "";
+        quotation += (char) 34;
         // Test for "doesWordExist" method
         bool dadada = doesWordExist("mad");
         Console.WriteLine("Word Exists?: " + dadada + "\n");
@@ -274,5 +285,7 @@ class WordFunctions
         // Test for "doesWordContainXLetter"
         doesWordContainXLetter("Sonic", 'c');
         doesWordContainXLetter("Sonic", 'j');
+        // Test for doesWordMatchMeaning
+        Console.WriteLine("Definition Matches?: " + doesWordMatchMeaning("Quack", "The cry of the duck, or a sound in imitation of it; a hoarse, quacking noise." + quotation));
     } // Main
 }
